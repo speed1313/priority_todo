@@ -5,39 +5,45 @@ TODO items is stored to Sqlite DB.
 
 
 # Usage
-
+- add todo item
 ```
-$ Priority_TODO add
-please add TODO
-> buy watar
-please specify the priority level of the TODO from 10 to 1
-> 5
-accept TODO now!
-Latest TODO list is shown below
-1. buy water
-2. study Rust
-3. watch Hikakine TV
+$ ./target/debug/priority_todo --method add
+input todo text:
+buy water
+input priority:
+6
+--TODO LIST--
+ID TODO PRIORITY
+1, play the guiter, 4
+2, buy water, 6
 ```
-
-- complete TODO item
+- show todo list sorted by priority
 ```
-$ Priority_TODO complete
-please select the number of TODO item from TODO list below
-1. buy water
-2. study Rust
-3. watch Hikakine TV
-> 2
-accept now!
-Latest TODO list is shown below
-1. buy water
-2. watch Hikakine TV
+$ ./target/debug/priority_todo --method show
+ID TODO PRIORITY
+1, play the guiter, 4
+2, buy water, 6
 ```
 
-- show TODO item
+- delete todo item from todo list
 ```
-$ Priority_TODO show
-1. buy water
-2. watch Hikakine TV
+$ ./target/debug/priority_todo --method complete
+--TODO LIST--
+ID TODO PRIORITY
+1, play the guiter, 4
+2, buy water, 6
+
+input complete todo ID:
+2
+--TODO LIST--
+ID TODO PRIORITY
+1, play the guiter, 4
 ```
 
+- reset todo list
+```
+$ ./target/debug/priority_todo --method reset
 
+$ ./target/debug/priority_todo --method show
+ID TODO PRIORITY
+```

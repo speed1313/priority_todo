@@ -11,8 +11,7 @@ struct Args {
     method: String,
 }
 
-
-fn main()->Result<()> {
+fn main() -> Result<()> {
     let path = "./my_db.db3";
     let conn = Connection::open(&path)?;
     conn.execute(
