@@ -24,26 +24,16 @@ struct Todolist{
 }
 
 fn main()->Result<()> {
-    let conn = Connection::open_in_memory()?;
+    let path = "./my_db.db3";
+    let conn = Connection::open(&path)?;
     conn.execute(
-        "CREATE TABLE todolist (
+        "CREATE TABLE IF NOT EXISTS todolist (
             id  INTEGER PRIMARY KEY,
             todo TEXT NOT NULL,
             priority INTEGER
         )",
         [],
     )?;
-
-    let me = Todolist{
-        id: 0,
-        todo: "Watch Hikakin TV".to_string(),
-        priority: 5,
-    };
-    conn.execute(
-        "INSERT INTO todolist (todo, priority) VALUES (?1, ?2)",
-        params![me.todo, me.priority],
-    )?;
-
 
     let args = Args::parse();
     match &*args.method {
@@ -87,6 +77,11 @@ fn add(conn: &Connection) -> Result<()> {
 }
 
 fn complete(conn: &Connection) -> Result<()> {
+
+    Ok(())
+}
+
+fn show(conn: &Connection) -> Result<()> {
     let mut stmt = conn.prepare("SELECT id, todo, priority FROM todolist")?;
     let todolist_iter = stmt.query_map([], |row| {
         Ok(Todolist{
@@ -101,9 +96,5 @@ fn complete(conn: &Connection) -> Result<()> {
     for item in todolist{
         println!("TODO :{}, {}", item.as_ref().unwrap().todo, item.as_ref().unwrap().priority);
     }
-    Ok(())
-}
-
-fn show(conn: &Connection) -> Result<()> {
     Ok(())
 }
