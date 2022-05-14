@@ -1,20 +1,13 @@
 # Priority_TODO
 
 you can use priority queue TODO.
-TODO items is stored to a local file.
-The storage file's format is like below
-```
-watch Hikakine TV, 2
-study Rust, 4
-buy water, 5
-```
-first column is TODO item, second column is priority level.
+TODO items is stored to Sqlite DB.
 
 
 # Usage
-- add TODO item
+
 ```
-$ Priority_TODO add 
+$ Priority_TODO add
 please add TODO
 > buy watar
 please specify the priority level of the TODO from 10 to 1
